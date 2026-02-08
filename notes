@@ -2,3 +2,19 @@
 
 2. Less training time, couple of seconds to a minute. See what works individually, then combination
 
+3. Start with larger sets, train on subset, increase training time. See how increasing training time improves the model.
+
+4. Search for benchmarks, ask the llms for this task. 
+
+5. Using the benchmarks, use similar models. Then use quantum models.
+
+6. Start qubits low, then increase qubits near the end.
+
+7. Exploration phase: put low qubits, low features, small models
+
+8. Explotation phase: Ramp it up gradually
+
+9. Look at Wu's Horatio's, and Sean's repos.
+
+10. 
+ 
