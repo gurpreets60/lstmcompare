@@ -8,7 +8,7 @@
 
 5. Using the benchmarks, use similar models. Then use quantum models.
 
-6. Start qubits low, then increase qubits near the end.
+6. Start qubits low[<0;131;1M, then increase qubits near the end.
 
 7. Exploration phase: put low qubits, low features, small models
 

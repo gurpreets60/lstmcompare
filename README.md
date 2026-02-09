@@ -1,3 +1,128 @@
+📈 Stock Return Classification with Classical and Quantum Models (Current Progress)
+Project Overview
+
+This project investigates short-horizon stock return predictability using both classical machine learning models and quantum-inspired neural networks.
+The current focus is on binary classification of 10-day future returns for a single stock (Apple, AAPL), with the goal of evaluating whether quantum models can match or exceed classical baselines under constrained data regimes.
+
+We closely follow the experimental framing of Htun et al. (2024) while extending it to include quantum neural architectures implemented with PennyLane and PyTorch.
+
+Prediction Task
+Target Definition
+
+For each trading day 
+i
+i, we predict whether Apple’s future return within the next 10 trading days exceeds a fixed threshold:
+
+y(i)={1	if max⁡k=1,…,10R(i,k)≥2%
+0	otherwise
+y(i)={
+1
+0
+	​
+
+if max
+k=1,…,10
+	​
+
+R(i,k)≥2%
+otherwise
+	​
+
+
+Where:
+
+R(i,k)
+R(i,k) is the relative return between day 
+i
+i and day 
+i+k
+i+k
+
+The threshold is fixed at 2%, chosen to approximately balance the class distribution (as in Htun et al.)
+
+This yields a binary classification problem with roughly balanced labels.
+
+Data and Feature Construction
+
+Stock: Apple Inc. (AAPL)
+
+Date range: 2020–2025
+
+Features:
+Relative-return–based features over multiple horizons, consistent with the reference study:
+
+1, 5, 10, 15, 20, 40, 60, 80, 100, 120, 150, 180, 260 days
+
+Label: Binary indicator of ≥2% future return within 10 trading days
+
+Sliding Window Evaluation Protocol
+
+We use a rolling (sliding) window approach:
+
+Training window: 253 trading days (~12 months)
+
+Gap: 10 trading days (to avoid label leakage)
+
+Test window: 21 trading days (~1 month)
+
+Shift: 21 trading days per window
+
+Current Restriction (Computational Benchmarking)
+
+To enable rapid iteration and quantum-model benchmarking, we currently restrict evaluation to 3 sliding windows, sampled across the full time range.
+
+This restriction applies uniformly across all models and is intended as a rough, early-stage benchmark, not a final performance claim.
+
+The number of windows will be expanded in future experiments.
+
+Models Implemented
+Classical Baselines
+
+Random Forest (RF)
+
+Support Vector Machine (SVM, RBF kernel)
+
+Long Short-Term Memory (LSTM)
+
+Sequence-based model using scaled relative-return features
+
+Quantum / Quantum-Inspired Models
+
+Quantum LSTM (QLSTM)
+
+LSTM architecture with quantum variational circuits replacing classical gates
+
+Quantum Feedforward Network (TorchVQC-FF)
+
+PennyLane-based variational quantum classifier integrated with PyTorch
+
+Quantum Fast-Weight Programmer (QFWP)
+
+Dynamically parameterized quantum circuit updated over time steps
+
+All quantum models are trained with very small epoch counts (1–2 epochs) to reflect:
+
+current hardware and simulation constraints
+
+the hypothesis that quantum models may perform competitively in low-data / low-iteration regimes
+
+Evaluation Metrics
+
+All models are evaluated using standard binary classification metrics, consistent with the reference study:
+
+Accuracy
+
+Precision
+
+Recall
+
+F1-score
+
+Metrics are computed per window and aggregated as:
+
+mean±standard deviation
+mean±standard deviation
+
 # Hybrid Quantum LSTM vs. Classical LSTM for Financial Time Series Prediction
 
 The goal was to explores the application of Quantum Machine Learning (QML) in financial forecasting. Specifically, it compares the performance of a **Classical Long Short-Term Memory (LSTM)** network against a **Hybrid Quantum LSTM (QLSTM)** in predicting the 5-day future returns of Apple Inc. (AAPL) stock.
